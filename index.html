@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PreXXXotica</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f9fa;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            text-align: left;
+            padding: 15px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #0066ff;
+        }
+        .container {
+            max-width: 400px;
+            background: white;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            display: none; /* Ocultar por defecto */
+        }
+        .logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+        }
+        .description {
+            font-size: 14px;
+            color: #555;
+            margin-top: 10px;
+        }
+        .btn {
+            display: inline-block;
+            background: #0066ff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 15px;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-disabled {
+            background: gray;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">PreXXXotica</div>
+
+    <!-- Página 1 -->
+    <div id="pagina1" class="container">
+        <img src="https://i.postimg.cc/fRKM6sMQ/Pre-XXXotica.png" alt="Logo" class="logo">
+        <p class="description">URL Preparada.</p>
+        <button class="btn" onclick="mostrarPagina('pagina2')">Continuar</button>
+    </div>
+
+    <!-- Página 2 con contador -->
+    <div id="pagina2" class="container">
+        <img src="https://i.postimg.cc/fRKM6sMQ/Pre-XXXotica.png" alt="Logo" class="logo">
+        <p class="description">Por favor, espera mientras se prepara tu enlace.</p>
+        <p id="contador">8 Segundos</p>
+        <a id="botonIr" href="https://www.effectiveratecpm.com/q6yxskx5?key=fd35bb902306abfd2013a7eff03d5343" class="btn btn-disabled" style="pointer-events: none;">Ir →</a>
+    </div>
+
+    <script>
+        function mostrarPagina(id) {
+            document.getElementById("pagina1").style.display = "none";
+            document.getElementById("pagina2").style.display = "none";
+            document.getElementById(id).style.display = "block";
+
+            if (id === "pagina2") {
+                iniciarContador();
+            }
+        }
+
+        function iniciarContador() {
+            let tiempo = 8;
+            let contadorElemento = document.getElementById("contador");
+            let boton = document.getElementById("botonIr");
+
+            let intervalo = setInterval(() => {
+                tiempo--;
+                contadorElemento.innerText = tiempo + " Segundos";
+
+                if (tiempo <= 0) {
+                    clearInterval(intervalo);
+                    boton.classList.remove("btn-disabled");
+                    boton.style.pointerEvents = "auto"; // Habilitar el enlace
+                }
+            }, 1000);
+        }
+
+        // Mostrar la primera página al cargar
+        mostrarPagina('pagina1');
+    </script>
+
+</body>
+</html>
