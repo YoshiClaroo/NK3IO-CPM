@@ -26,7 +26,6 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            display: none; /* Ocultar por defecto */
         }
         .logo {
             width: 80px;
@@ -47,16 +46,22 @@
             text-decoration: none;
             font-size: 16px;
             margin-top: 15px;
-            cursor: pointer;
-            border: none;
         }
-        .btn-disabled {
+        .disabled {
             background: gray;
-            cursor: not-allowed;
+            pointer-events: none;
+        }
+        .hidden {
+            display: none;
         }
     </style>
 </head>
 <body>
+
+    <!-- Barra social -->
+    <script type='text/javascript' src='//pl26046236.effectiveratecpm.com/16/9d/4a/169d4a6c2ec5e8f42fcc8d2f8da280ad.js'></script>
+    <!-- Popunder -->
+    <script type='text/javascript' src='//pl26046229.effectiveratecpm.com/04/82/87/04828792cfc9bc1c177f593f7fa01b5b.js'></script>
 
     <div class="header">PreXXXotica</div>
 
@@ -64,48 +69,87 @@
     <div id="pagina1" class="container">
         <img src="https://i.postimg.cc/fRKM6sMQ/Pre-XXXotica.png" alt="Logo" class="logo">
         <p class="description">URL Preparada.</p>
-        <button class="btn" onclick="mostrarPagina('pagina2')">Continuar</button>
+
+        <!-- Anuncio bandera nativa (arriba del botón) -->
+        <script async="async" data-cfasync="false" src="//pl26046243.effectiveratecpm.com/215fa8a4d73331ce09dcea32d665457b/invoke.js"></script>
+        <div id="container-215fa8a4d73331ce09dcea32d665457b"></div>
+
+        <p id="contador1">5 Segundos</p>
+        <a href="#" id="botonContinuar" class="btn disabled">Continuar</a>
+
+        <!-- Anuncio bandera nativa (abajo del botón) -->
+        <script async="async" data-cfasync="false" src="//pl26046243.effectiveratecpm.com/215fa8a4d73331ce09dcea32d665457b/invoke.js"></script>
+        <div id="container-215fa8a4d73331ce09dcea32d665457b"></div>
     </div>
 
-    <!-- Página 2 con contador -->
-    <div id="pagina2" class="container">
+    <!-- Página 2 (oculta al inicio) -->
+    <div id="pagina2" class="container hidden">
         <img src="https://i.postimg.cc/fRKM6sMQ/Pre-XXXotica.png" alt="Logo" class="logo">
         <p class="description">Por favor, espera mientras se prepara tu enlace.</p>
-        <p id="contador">8 Segundos</p>
-        <a id="botonIr" href="https://www.effectiveratecpm.com/q6yxskx5?key=fd35bb902306abfd2013a7eff03d5343" class="btn btn-disabled" style="pointer-events: none;">Ir →</a>
+
+        <!-- Anuncio bandera nativa (arriba del botón) -->
+        <script async="async" data-cfasync="false" src="//pl26046243.effectiveratecpm.com/215fa8a4d73331ce09dcea32d665457b/invoke.js"></script>
+        <div id="container-215fa8a4d73331ce09dcea32d665457b"></div>
+
+        <p id="contador2">8 Segundos</p>
+        <a id="botonIr" href="https://www.effectiveratecpm.com/q6yxskx5?key=fd35bb902306abfd2013a7eff03d5343" class="btn hidden">Ir</a>
+
+        <!-- Anuncio bandera nativa (abajo del botón) -->
+        <script async="async" data-cfasync="false" src="//pl26046243.effectiveratecpm.com/215fa8a4d73331ce09dcea32d665457b/invoke.js"></script>
+        <div id="container-215fa8a4d73331ce09dcea32d665457b"></div>
     </div>
 
+    <!-- Banner (abajo de todo) -->
+    <script type="text/javascript">
+        atOptions = {
+            'key': '466fbf1bd50263b8ce365e4bddaa4940',
+            'format': 'iframe',
+            'height': 60,
+            'width': 468,
+            'params': {}
+        };
+    </script>
+    <script type="text/javascript" src="//www.highperformanceformat.com/466fbf1bd50263b8ce365e4bddaa4940/invoke.js"></script>
+
     <script>
-        function mostrarPagina(id) {
-            document.getElementById("pagina1").style.display = "none";
-            document.getElementById("pagina2").style.display = "none";
-            document.getElementById(id).style.display = "block";
+        // Contador para el botón "Continuar"
+        let segundos1 = 5;
+        let contador1 = document.getElementById("contador1");
+        let botonContinuar = document.getElementById("botonContinuar");
 
-            if (id === "pagina2") {
-                iniciarContador();
+        let intervalo1 = setInterval(() => {
+            segundos1--;
+            contador1.textContent = segundos1 + " Segundos";
+
+            if (segundos1 === 0) {
+                clearInterval(intervalo1);
+                contador1.textContent = "";
+                botonContinuar.classList.remove("disabled");
+                botonContinuar.addEventListener("click", mostrarPagina2);
             }
-        }
+        }, 1000);
 
-        function iniciarContador() {
-            let tiempo = 8;
-            let contadorElemento = document.getElementById("contador");
-            let boton = document.getElementById("botonIr");
+        // Función para mostrar la segunda página y contar 8 segundos antes de activar "Ir"
+        function mostrarPagina2() {
+            document.getElementById("pagina1").classList.add("hidden");
+            document.getElementById("pagina2").classList.remove("hidden");
 
-            let intervalo = setInterval(() => {
-                tiempo--;
-                contadorElemento.innerText = tiempo + " Segundos";
+            let segundos2 = 8;
+            let contador2 = document.getElementById("contador2");
+            let botonIr = document.getElementById("botonIr");
 
-                if (tiempo <= 0) {
-                    clearInterval(intervalo);
-                    boton.classList.remove("btn-disabled");
-                    boton.style.pointerEvents = "auto"; // Habilitar el enlace
+            let intervalo2 = setInterval(() => {
+                segundos2--;
+                contador2.textContent = segundos2 + " Segundos";
+
+                if (segundos2 === 0) {
+                    clearInterval(intervalo2);
+                    contador2.textContent = "";
+                    botonIr.classList.remove("hidden");
                 }
             }, 1000);
         }
-
-        // Mostrar la primera página al cargar
-        mostrarPagina('pagina1');
     </script>
 
 </body>
-</html>
+            </html>
