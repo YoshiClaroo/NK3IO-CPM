@@ -45,111 +45,105 @@
             border-radius: 5px;
             text-decoration: none;
             font-size: 16px;
-            margin: 15px 0;
+            margin-top: 15px;
             pointer-events: none;
-            opacity: 0.6;
-        }
-        .ad-banner {
-            margin: 10px 0;
+            opacity: 0.5;
         }
     </style>
 </head>
 <body>
 
     <div class="header">Prex CPM Link</div>
-    <!-- Boton atras -->
+    <div class="container">
+        <img src="https://i.postimg.cc/fRKM6sMQ/Pre-XXXotica.png" alt="Logo" class="logo">
+        <p class="description">URL Preparada.</p>
+        
+        <!-- Banner arriba del botón -->
+        <script async src="https://js.wpadmngr.com/static/adManager.js" data-admpid="303391"></script>
+
+        <br>
+
+        <a id="continueBtn" class="btn">Continuar</a>
+
+        <br>
+
+        <!-- Banner abajo del botón -->
+        <script async src="https://js.wpadmngr.com/static/adManager.js" data-admpid="303393"></script>
+    </div>
+
     <script>
-      var Back_Button_Zone = 9060514;
-      var Domain_TB = "shedroobsoa.net";
-</script>
-<script async src="https://desenteir.com/5c0/ca5b0/reverse.min.js?sf=1"></script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let button = document.getElementById("continueBtn");
+            let countdown = 10;
 
-    <!-- Nuevo código de anuncios (incluye todos en uno) -->
-    <script>
-    (function () {
-        var clickUrl = "https://toopsoug.net/4/9062472?var={your_source_id}";
+            function updateButton() {
+                if (countdown > 0) {
+                    button.textContent = "Esperar " + countdown + "s";
+                    countdown--;
+                    setTimeout(updateButton, 1000);
+                } else {
+                    button.textContent = "Continuar";
+                    button.href = "segunda.html"; // Redirige a la segunda página
+                    button.style.pointerEvents = "auto";
+                    button.style.opacity = "1";
+                }
+            }
 
-        function clickTbEventInit() {
-            document.addEventListener('click', function () {
-                window.onbeforeunload = null;
-                window.open(clickUrl, '_blank', 'noreferrer,noopener');
-            });
-        }
-
-        setTimeout(function () {
-            clickTbEventInit();
-        }, 5000);
-    })();
+            updateButton();
+        });
     </script>
 
-    <div id="pagina1" class="container">
+</body>
+</html>
+
+<!-- Segunda página -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prex CPM Link</title>
+</head>
+<body>
+
+    <div class="header">Prex CPM Link</div>
+    <div class="container">
         <img src="https://i.postimg.cc/fRKM6sMQ/Pre-XXXotica.png" alt="Logo" class="logo">
         <p class="description">URL Preparada.</p>
 
         <!-- Banner arriba del botón -->
-        <div class="ad-banner">
-            <script async src="https://js.wpadmngr.com/static/adManager.js" data-admpid="303391"></script>
-        </div>
+        <script async src="https://js.wpadmngr.com/static/adManager.js" data-admpid="303391"></script>
 
-        <a id="continue-btn" href="#" class="btn" onclick="mostrarSegundaPagina()">Continuar</a>
+        <br>
 
-        <!-- Banner abajo del botón -->
-        <div class="ad-banner">
-            <script async src="https://js.wpadmngr.com/static/adManager.js" data-admpid="303393"></script>
-        </div>
-    </div>
+        <a id="goBtn" class="btn">Ir</a>
 
-    <div id="pagina2" class="container" style="display: none;">
-        <img src="https://i.postimg.cc/fRKM6sMQ/Pre-XXXotica.png" alt="Logo" class="logo">
-        <p class="description">URL Preparada.</p>
-
-        <!-- Banner arriba del botón -->
-        <div class="ad-banner">
-            <iframe data-aa='2384662' src='//ad.a-ads.com/2384662?size=300x250' style='width:300px; height:250px; border:0; padding:0; overflow:hidden; background-color: transparent;'></iframe>
-            <a style="display: block; text-align: right; font-size: 12px;" href="https://aads.com/campaigns/new/?source_id=2384662&source_type=ad_unit&partner=2384662">Advertise here</a>
-        </div>
-
-        <a id="go-btn" href="https://giphootchebs.net/4/9049442" class="btn">Ir</a>
+        <br>
 
         <!-- Banner abajo del botón -->
-        <div class="ad-banner">
-            <iframe data-aa='2384662' src='//ad.a-ads.com/2384662?size=300x250' style='width:300px; height:250px; border:0; padding:0; overflow:hidden; background-color: transparent;'></iframe>
-            <a style="display: block; text-align: right; font-size: 12px;" href="https://aads.com/campaigns/new/?source_id=2384662&source_type=ad_unit&partner=2384662">Advertise here</a>
-        </div>
+        <script async src="https://js.wpadmngr.com/static/adManager.js" data-admpid="303393"></script>
     </div>
 
     <script>
-        let continueBtn = document.getElementById("continue-btn");
-        let goBtn = document.getElementById("go-btn");
+        document.addEventListener("DOMContentLoaded", function () {
+            let button = document.getElementById("goBtn");
+            let countdown = 10;
 
-        let seconds1 = 10;
-        let interval1 = setInterval(() => {
-            continueBtn.innerText = "Continuar (" + seconds1 + "s)";
-            seconds1--;
-            if (seconds1 < 0) {
-                clearInterval(interval1);
-                continueBtn.style.pointerEvents = "auto";
-                continueBtn.style.opacity = "1";
-                continueBtn.innerText = "Continuar";
-            }
-        }, 1000);
-
-        function mostrarSegundaPagina() {
-            document.getElementById("pagina1").style.display = "none";
-            document.getElementById("pagina2").style.display = "block";
-
-            let seconds2 = 10;
-            let interval2 = setInterval(() => {
-                goBtn.innerText = "Ir (" + seconds2 + "s)";
-                seconds2--;
-                if (seconds2 < 0) {
-                    clearInterval(interval2);
-                    goBtn.style.pointerEvents = "auto";
-                    goBtn.style.opacity = "1";
-                    goBtn.innerText = "Ir";
+            function updateButton() {
+                if (countdown > 0) {
+                    button.textContent = "Esperar " + countdown + "s";
+                    countdown--;
+                    setTimeout(updateButton, 1000);
+                } else {
+                    button.textContent = "Ir";
+                    button.href = "https://giphootchebs.net/4/9049442";
+                    button.style.pointerEvents = "auto";
+                    button.style.opacity = "1";
                 }
-            }, 1000);
-        }
+            }
+
+            updateButton();
+        });
     </script>
 
 </body>
