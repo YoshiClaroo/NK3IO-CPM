@@ -2,11 +2,19 @@
   publish = "public"
   functions = "netlify/functions"
 
+# Redirige todas las rutas al login, excepto /redirect y /404
 [[redirects]]
   from = "/*"
+  to = "/login.html"
+  status = 200
+  conditions = {Role = "anonymous"}  # Solo para usuarios no autenticados
+  force = true
+
+# Excepciones (rutas públicas)
+[[redirects]]
+  from = "/redirect"
   to = "/redirect.html"
   status = 200
-  force = false
 
 [[redirects]]
   from = "/404"
