@@ -2,180 +2,64 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NK3IO - Panel de Control</title>
-    <link rel="stylesheet" href="/assets/style.css">
-    <link rel="stylesheet" href="/admin/assets/admin.css">
-    <link rel="icon" href="/assets/logo.png">
+    <title>NK3IO - Panel</title>
+    <link rel="stylesheet" href="/admin/style.css">
 </head>
 <body>
-    <header class="admin-header">
-        <div class="brand">
-            <img src="/assets/logo.png" alt="NK3IO Logo" class="logo">
-            <h1>NK3IO</h1>
-        </div>
-        <button id="logoutBtn" class="btn-logout">Cerrar Sesión</button>
+    <header>
+        <h1>Panel NK3IO</h1>
+        <button id="logoutBtn">Salir</button>
     </header>
-
-    <main class="admin-main">
-        <section class="url-form">
-            <h2>Acortar Nueva URL</h2>
-            <form id="shortenForm">
-                <div class="form-group">
-                    <input type="url" id="originalUrl" placeholder="https://ejemplo.com" required>
-                </div>
-                <div class="form-group">
-                    <input type="text" id="customCode" placeholder="Código personalizado (opcional)">
-                </div>
-                <button type="submit" class="btn-primary">Acortar</button>
-                <div id="formMessage" class="message"></div>
-            </form>
-        </section>
-
-        <section class="url-list">
-            <h2>Tus URLs Acortadas</h2>
-            <div class="stats">
-                <div class="stat-card">
-                    <h3>Total URLs</h3>
-                    <p id="totalUrls">0</p>
-                </div>
-                <div class="stat-card">
-                    <h3>Total Clicks</h3>
-                    <p id="totalClicks">0</p>
-                </div>
-            </div>
-
-            <table id="urlsTable">
+    <main>
+        <div class="url-form">
+            <input type="url" id="longUrl" placeholder="https://ejemplo.com">
+            <button id="shortenBtn">Acortar</button>
+        </div>
+        <div class="url-list">
+            <table>
                 <thead>
                     <tr>
                         <th>URL Corta</th>
                         <th>URL Original</th>
                         <th>Clicks</th>
-                        <th>Fecha</th>
-                        <th>Acciones</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <!-- Las URLs se cargarán aquí con JavaScript -->
-                </tbody>
+                <tbody id="urlTableBody"></tbody>
             </table>
-        </section>
+        </div>
     </main>
-
     <script>
-        // Verificar autenticación
-        const token = localStorage.getItem('nk3io_token');
-        if (!token) {
-            window.location.href = '/';
+        // Mostrar todas las URLs al cargar
+        async function loadUrls() {
+            const response = await fetch('/.netlify/functions/urls');
+            const urls = await response.json();
+            const tableBody = document.getElementById('urlTableBody');
+            
+            tableBody.innerHTML = urls.map(url => `
+                <tr>
+                    <td><a href="/${url.short_code}" target="_blank">${url.short_code}</a></td>
+                    <td>${url.original_url}</td>
+                    <td>${url.clicks}</td>
+                </tr>
+            `).join('');
         }
+
+        // Acortar nueva URL
+        document.getElementById('shortenBtn').onclick = async () => {
+            const longUrl = document.getElementById('longUrl').value;
+            const response = await fetch(`/.netlify/functions/urls?url=${encodeURIComponent(longUrl)}`);
+            const data = await response.json();
+            alert(`URL acortada: ${data.shortUrl}`);
+            loadUrls();
+        };
 
         // Cerrar sesión
-        document.getElementById('logoutBtn').addEventListener('click', () => {
-            localStorage.removeItem('nk3io_token');
-            window.location.href = '/';
-        });
+        document.getElementById('logoutBtn').onclick = () => {
+            if (confirm("¿Salir del panel?")) {
+                window.location.href = "/";
+            }
+        };
 
-        // Cargar URLs
-        async function loadUrls() {
-            try {
-                const response = await fetch('/.netlify/functions/urls', {
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-                
-                const data = await response.json();
-                
-                if (response.ok) {
-                    const tableBody = document.querySelector('#urlsTable tbody');
-                    tableBody.innerHTML = '';
-                    
-                    let totalClicks = 0;
-                    
-                    data.forEach(url => {
-                        totalClicks += url.clicks || 0;
-                        
-                        const row = document.createElement('tr');
-                        row.innerHTML = `
-                            <td><a href="/${url.shortCode}" target="_blank">${url.shortCode}</a></td>
-                            <td class="original-url">${url.originalUrl}</td>
-                            <td>${url.clicks || 0}</td>
-                            <td>${new Date(url.createdAt).toLocaleDateString()}</td>
-                            <td>
-                                <button class="btn-copy" data-url="https://${window.location.hostname}/${url.shortCode}">
-                                    Copiar
-                                </button>
-                            </td>
-                        `;
-                        tableBody.appendChild(row);
-                    });
-                    
-                    document.getElementById('totalUrls').textContent = data.length;
-                    document.getElementById('totalClicks').textContent = totalClicks;
-                    
-                    // Agregar eventos a los botones de copiar
-                    document.querySelectorAll('.btn-copy').forEach(btn => {
-                        btn.addEventListener('click', () => {
-                            navigator.clipboard.writeText(btn.dataset.url);
-                            btn.textContent = 'Copiado!';
-                            setTimeout(() => {
-                                btn.textContent = 'Copiar';
-                            }, 2000);
-                        });
-                    });
-                } else {
-                    if (response.status === 401) {
-                        localStorage.removeItem('nk3io_token');
-                        window.location.href = '/';
-                    } else {
-                        console.error('Error al cargar URLs:', data.error);
-                    }
-                }
-            } catch (error) {
-                console.error('Error:', error);
-            }
-        }
-        
-        // Acortar nueva URL
-        document.getElementById('shortenForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const originalUrl = document.getElementById('originalUrl').value;
-            const customCode = document.getElementById('customCode').value;
-            const messageEl = document.getElementById('formMessage');
-            
-            try {
-                const response = await fetch('/.netlify/functions/urls', {
-                    method: 'POST',
-                    headers: { 
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify({ originalUrl, customCode })
-                });
-                
-                const data = await response.json();
-                
-                if (response.ok) {
-                    messageEl.textContent = `URL acortada: ${data.shortUrl}`;
-                    messageEl.style.display = 'block';
-                    messageEl.style.color = 'green';
-                    
-                    document.getElementById('originalUrl').value = '';
-                    document.getElementById('customCode').value = '';
-                    
-                    // Recargar la lista
-                    loadUrls();
-                } else {
-                    messageEl.textContent = data.error || 'Error al acortar URL';
-                    messageEl.style.display = 'block';
-                    messageEl.style.color = 'red';
-                }
-            } catch (error) {
-                messageEl.textContent = 'Error de conexión';
-                messageEl.style.display = 'block';
-                messageEl.style.color = 'red';
-            }
-        });
-        
-        // Cargar URLs al iniciar
         loadUrls();
     </script>
 </body>
