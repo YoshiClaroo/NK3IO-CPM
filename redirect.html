@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redireccionando - NK3IO</title>
+    <link rel="stylesheet" href="/assets/style.css">
+    <link rel="icon" href="/assets/logo.png">
+</head>
+<body>
+    <div class="redirect-container">
+        <img src="/assets/logo.png" alt="NK3IO Logo" class="logo">
+        <h2>Redireccionando...</h2>
+        <p id="countdown">Serás redirigido en 5 segundos</p>
+        <a id="redirectLink" href="#" class="btn-primary">Ir ahora</a>
+        
+        <!-- Analytics o anuncios pueden ir aquí -->
+        <div class="ad-container">
+            <!-- Espacio para publicidad si lo deseas -->
+        </div>
+    </div>
+
+    <script>
+        // Obtener el código corto de la URL
+        const path = window.location.pathname.split('/').filter(p => p)[0];
+        
+        // Buscar la URL original
+        async function findOriginalUrl() {
+            try {
+                const response = await fetch(`/.netlify/functions/redirect?shortCode=${path}`);
+                const data = await response.json();
+                
+                if (response.ok && data.originalUrl) {
+                    const redirectLink = document.getElementById('redirectLink');
+                    redirectLink.href = data.originalUrl;
+                    
+                    // Contador regresivo
+                    let seconds = 5;
+                    const countdown = setInterval(() => {
+                        document.getElementById('countdown').textContent = `Serás redirigido en ${seconds} segundos`;
+                        seconds--;
+                        
+                        if (seconds < 0) {
+                            clearInterval(countdown);
+                            window.location.href = data.originalUrl;
+                        }
+                    }, 1000);
+                } else {
+                    window.location.href = '/404';
+                }
+            } catch (error) {
+                window.location.href = '/404';
+            }
+        }
+        
+        findOriginalUrl();
+    </script>
+</body>
+</html>
