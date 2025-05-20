@@ -2,30 +2,26 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NK3IO - Admin</title>
+    <title>NK3IO - Login</title>
     <link rel="stylesheet" href="/assets/style.css">
 </head>
 <body>
-    <div class="login-container">
-        <h1>🔒 NK3IO Admin</h1>
+    <div class="login-box">
+        <h1>NK3IO</h1>
         <form id="loginForm">
-            <input type="password" placeholder="Contraseña" id="password" required>
-            <button type="submit">Entrar</button>
+            <input type="password" placeholder="Tu contraseña" required>
+            <button>Entrar</button>
         </form>
     </div>
-
     <script>
-        document.getElementById('loginForm').addEventListener('submit', (e) => {
+        document.getElementById('loginForm').onsubmit = (e) => {
             e.preventDefault();
-            const password = document.getElementById('password').value;
-            // Cambia "TU_CONTRASEÑA" por tu contraseña real
-            if (password === "TU_CONTRASEÑA") {
+            if (e.target[0].value === "TU_CONTRASEÑA_SEGURA") {
                 window.location.href = "/admin";
             } else {
                 alert("Contraseña incorrecta");
             }
-        });
+        };
     </script>
 </body>
 </html>
