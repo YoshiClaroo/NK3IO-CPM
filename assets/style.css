@@ -1,129 +1,54 @@
-:root {
-    --primary-color: #6a11cb;
-    --secondary-color: #2575fc;
-    --accent-color: #ff4d4d;
-    --dark-color: #1a1a2e;
-    --light-color: #f8f9fa;
-}
-
+/* Estilos generales */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    color: white;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
 }
 
-.login-container, .redirect-container {
-    max-width: 450px;
-    margin: 0 auto;
-    padding: 2rem;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border-radius: 15px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
+/* Login */
+.login-container {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  border-radius: 10px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
-.logo {
-    width: 80px;
-    height: 80px;
-    margin-bottom: 1rem;
-    border-radius: 50%;
-    border: 3px solid white;
+.login-container input {
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  margin: 10px 0;
+  width: 80%;
 }
 
-.branding h1 {
-    margin: 0;
-    font-size: 2.5rem;
-    background: linear-gradient(to right, white, #eee);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+.login-container button {
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-.branding p {
-    margin-top: 0.5rem;
-    opacity: 0.8;
+/* Redirección */
+.redirect-container {
+  text-align: center;
 }
 
-.form-group {
-    margin-bottom: 1.5rem;
-    text-align: left;
+.btn {
+  background: #ff4d4d;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 20px;
 }
-
-.form-group input {
-    width: 100%;
-    padding: 12px 15px;
-    border: none;
-    border-radius: 25px;
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-    font-size: 1rem;
-    transition: all 0.3s;
-}
-
-.form-group input:focus {
-    outline: none;
-    background: rgba(255, 255, 255, 0.3);
-    box-shadow: 0 0 0 2px var(--accent-color);
-}
-
-.form-group input::placeholder {
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.btn-login, .btn-primary {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 25px;
-    background: var(--accent-color);
-    color: white;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.btn-login:hover, .btn-primary:hover {
-    background: #ff3333;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-.message {
-    margin-top: 1rem;
-    padding: 10px;
-    border-radius: 5px;
-    display: none;
-}
-
-/* Estilos para la página de redirección */
-#countdown {
-    font-size: 1.2rem;
-    margin: 1.5rem 0;
-}
-
-.ad-container {
-    margin-top: 2rem;
-    padding: 1rem;
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-}
-
-/* Panel de administración */
-.admin-panel {
-    max-width: 1000px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background: white;
-    border-radius: 15px;
-    color: var(--dark-color);
-}
-
-/* ... más estilos para el panel admin ... */
