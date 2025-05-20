@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>NK3IO - Login</title>
+    <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+    <div class="login-box">
+        <h1>🔒 NK3IO</h1>
+        <form id="login">
+            <input type="password" placeholder="Contraseña" required>
+            <button>Entrar</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById("login").onsubmit = (e) => {
+            e.preventDefault();
+            if (e.target[0].value === "TU_CONTRASEÑA") {
+                window.location.href = "/";
+            } else {
+                alert("Contraseña incorrecta");
+            }
+        };
+    </script>
+</body>
+</html>
