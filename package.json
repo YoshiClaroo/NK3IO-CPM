@@ -1,0 +1,8 @@
+{
+  "name": "nk3io",
+  "version": "1.0.0",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0",
+    "shortid": "^2.2.16"
+  }
+}
