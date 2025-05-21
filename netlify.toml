@@ -1,20 +1,12 @@
 [build]
-  publish = "public"
+  publish = "."  # ¡Importante! Busca archivos en la raíz
   functions = "netlify/functions"
 
-# Redirige todas las rutas al login, excepto /redirect y /404
 [[redirects]]
   from = "/*"
-  to = "/login.html"
+  to = "/index.html"
   status = 200
-  conditions = {Role = "anonymous"}  # Solo para usuarios no autenticados
-  force = true
-
-# Excepciones (rutas públicas)
-[[redirects]]
-  from = "/redirect"
-  to = "/redirect.html"
-  status = 200
+  force = false  # Permite acceso directo a login.html y redirect.html
 
 [[redirects]]
   from = "/404"
